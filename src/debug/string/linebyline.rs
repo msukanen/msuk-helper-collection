@@ -1,23 +1,16 @@
+use std::fmt::Display;
 use log::debug;
 
 pub trait DebugOutLineByLine {
-    fn debug(&self, prefix: Option<String>);
-}
-
-impl DebugOutLineByLine for String {
-    fn debug(&self, prefix: Option<String>) {
-        if let Some(prefix) = prefix {
-            debug!("{}", prefix);
-        }
-        for line in self.lines() {
-            debug!("{}", line);
-        }
+    fn debug<S: Display>(&self, prefix: Option<S>);
+    fn debug_noprefix(&self) {
+       self.debug(None::<&str>);
     }
 }
 
 impl DebugOutLineByLine for &str {
-    fn debug(&self, prefix: Option<String>) {
-        if let Some(prefix) = prefix {
+    fn debug<S: Display>(&self, prefix: Option<S>) {
+	if let Some(prefix) = prefix {
             debug!("{}", prefix);
         }
         for line in self.lines() {
@@ -36,6 +29,7 @@ mod debug_out_lbl_tests {
     fn debug_multiline_string_noprefix() {
         let _ = try_init();
         let s = "This string\nis split\non multiple\nlines.\n";
-        s.debug(None);
+        s.debug_noprefix();
+        s.debug(None::<&str>);
     }
 }
