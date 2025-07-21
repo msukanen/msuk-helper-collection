@@ -7,3 +7,9 @@ license = "MIT OR Apache-2.0"
 maintainer = { status = "experimental" }
 
 [dependencies]
+log = { version = "0.4.27", optional = true }
+env_logger = { version = "0.11.8", optional = true }
+
+[features]
+logging = ["dep:log", "dep:env_logger"]
+debug-out-lbl = ["logging"]
