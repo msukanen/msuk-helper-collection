@@ -1,7 +1,7 @@
 .cargo
 .vscode
 *.lock
-debug
+/debug
 target
 **/*.rs.bk
 *.pdb
