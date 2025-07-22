@@ -5,7 +5,7 @@ pub use linebyline::DebugOutLineByLine;
 
 #[cfg(test)]
 mod string_tests {
-    use super::*;
+    #[cfg(feature = "debug-out-lbl")]
     use env_logger::try_init;
 
     #[cfg(feature = "debug-out-lbl")]
